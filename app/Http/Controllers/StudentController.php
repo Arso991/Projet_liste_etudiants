@@ -8,24 +8,31 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     
-    //student datas
+    //fonction pour afficher les données de la table
     public function studentData(){
         $students = Students::all();
         
-        //sauvegarde du tableau dans session
         return view('student', compact('students'));
     }
 
+    //fonction pour afficher les détails
     public function studentDetails($id=null){
         $students = Students::all();
 
         $data = Students::find($id);
-
-        /* $idl = Students::latest('id')->first(); */
         
         return view('studentdetails', compact('id', 'data', 'students'));
     }
 
+    //fonction pour renvoyer les données selon l'id et faire la mise à jour
+    public function updateInfos($id=null){
+
+        $dataUpdate = Students::find($id);
+        
+        return view('studentdetails', compact('id', 'dataUpdate'));
+    }
+
+    //fonction pour ajouter un étudiant
     public function addStudent(Request $request){
         $data = $request->all();
 
@@ -37,8 +44,17 @@ class StudentController extends Controller
             "hobbie2" => "required",
             "hobbie3" => "required",
             "specialite" => "required",
-            "biographie" => "required"
+            "biographie" => "required",
+            "picture" => "required | mimes:jpg,jpeg,png"
         ]);
+
+        $image = null;
+        $file = $request->file("picture");
+
+        if($request->hasFile("picture")){
+            $image = $file->store("profil");
+        }
+        
         
         $save = Students::create([
             "nom" => $data['nom'],
@@ -48,9 +64,35 @@ class StudentController extends Controller
             "hobbie2" => $data['hobbie2'],
             "hobbie3" => $data['hobbie3'],
             "specialite" => $data['specialite'],
-            "biographie" => $data['biographie']
+            "biographie" => $data['biographie'],
+            "picture" => $image
         ]);
 
         return redirect()->route('index')->with('message', "Enrégistrement fait !");
+    }
+
+    //fonction pour mettre à jour dans la table
+    public function updateStudent(Request $request, $id){
+        $dataUpdate = $request->all();
+
+        $affected = Students::where('id', $id)->update([
+            "nom" => $dataUpdate['nom'],
+            "prenom" => $dataUpdate['prenom'],
+            "birthday" => $dataUpdate['birthday'],
+            "hobbie1" => $dataUpdate['hobbie1'],
+            "hobbie2" => $dataUpdate['hobbie2'],
+            "hobbie3" => $dataUpdate['hobbie3'],
+            "specialite" => $dataUpdate['specialite'],
+            "biographie" => $dataUpdate['biographie']
+        ]);
+
+        return redirect()->route('index');
+    }
+
+    //fonction pour supprimer un étudiant de la liste
+    public function deleteStudent($id){
+        $students = Students::where("id", $id)->delete();
+        
+        return redirect()->route('index');
     }
 }

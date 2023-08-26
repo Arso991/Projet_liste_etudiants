@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_student_list', function (Blueprint $table) {
-            $table->id();
-            $table->
-            $table->timestamps();
+        Schema::table('studentslist', function (Blueprint $table) {
+            //add photo column
+            $table->string("picture");
         });
     }
 
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_student_list');
+        //
     }
 };

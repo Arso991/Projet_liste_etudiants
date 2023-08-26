@@ -22,8 +22,8 @@
                 <tr>
                     <td>
                         <div style="width: 5rem; height:5rem; ">
-                            <img @if (!empty($item['image']))
-                            src="{{ $item['image'] }}" 
+                            <img @if (!empty($item['picture']))
+                            src="{{ asset($item['picture']) }}" height="100%" width="100%" style="object-fit: cover; border-radius:100%"
                             @endif src="{{ asset('img/img14.jpg') }}" alt="" height="100%" width="100%" style="object-fit: cover; border-radius:100%">
                         </div>
                     </td>
@@ -33,8 +33,8 @@
                     <td>
                         <div class="btn-group">
                             <a href="{{ route('studentId', ['id'=>$item['id']]) }}" type="button" class="btn btn-outline-warning">Voir plus</a>
-                            <button type="button" class="btn btn-outline-danger">Supprimer</button>
-                            <button type="button" class="btn btn-outline-primary">Modifier</button>
+                            <a href="{{ route('deleteStudent', ['id'=>$item['id']]) }}" type="button" class="btn btn-outline-danger">Supprimer</a>
+                            <a href="{{ route('updateInfos', ['id'=>$item['id']]) }}" type="button" class="btn btn-outline-primary">Modifier</a>
                         </div>
                     </td>
                 </tr>

@@ -4,15 +4,15 @@
         <a @if ($id<count($students))
         href="{{ route('studentId', ['id'=>$data['id']+1]) }}"
         @else
-        href="{{ route('index') }}"
+        href="{{ route('studentId', [1]) }}"
         @endif  class="btn btn-success">Suivant</a>
     </div>
     <div class="d-flex align-items-center">
         <div style="width: 40rem; height:30rem">
-            <img @if (!@empty($data['image'])) 
-            src="{{ $data['image'] }}" 
+            <img @if (!@empty($data['picture'])) 
+            src="{{ asset($data['picture']) }}" height="100%" width="100%" style="object-fit: cover; border-radius:15px" class="img-thumbnails mt-2 me-3" 
             @endif
-            src="{{ asset('img/img14.jpg') }}" height="100%" width="100%" style="object-fit: cover; border-radius:15px" class="img-thumbnails mt-2 me-3" src="image">
+            src="{{ asset('img/img14.jpg') }}" height="100%" width="100%" style="object-fit: cover; border-radius:15px" class="img-thumbnails mt-2 me-3">
         </div>
         <div style="font-size: 1.5rem; flex-direction:column" class="ps-3 d-flex">
             <p class="mb-4"><strong>Nom:</strong> {{ $data['nom'] }} </p>
