@@ -65,7 +65,8 @@ class StudentController extends Controller
             "hobbie3" => $data['hobbie3'],
             "specialite" => $data['specialite'],
             "biographie" => $data['biographie'],
-            "picture" => $image
+            "picture" => $image,
+            "status" => $data['status']
         ]);
 
         return redirect()->route('index')->with('message', "Enrégistrement fait !");
@@ -94,5 +95,17 @@ class StudentController extends Controller
         $students = Students::where("id", $id)->delete();
         
         return redirect()->route('index');
+    }
+
+    public function enable($id){
+        $data = Students::findOrFail($id);
+        $data->update(['status'=>true]);
+        return redirect()->route('index')->with('nom', $data['nom']);
+    }
+
+    public function disable($id){
+        $data = Students::findOrFail($id);
+        $data->update(['status'=>false]);
+        return redirect()->route('index')->with('name', $data['nom']);
     }
 }
