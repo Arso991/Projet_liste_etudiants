@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Students;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
     
     //fonction pour afficher les données de la table
     public function studentData(){
+        $user = Auth::user();
         $students = Students::all();
+
+        $nom = $user ? $user->name:'';
         
-        return view('student', compact('students'));
+        return view('student', compact('students', 'nom'));
     }
 
     //fonction pour afficher les détails

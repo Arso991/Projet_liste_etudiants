@@ -35,7 +35,9 @@ Route::controller(StudentController::class)->middleware('auth')->group(function(
 
 Route::controller(UserController::class)->group(function(){
     Route::get('/signin', 'login')->name('signin');
+    Route::get('/signout', 'logout')->name('signout');
     Route::get('/signup', 'register')->name('signup');
     Route::get('/verify_email/{email}', 'verify')->name('verifyEmail');
     Route::post('/signin/store', 'store')->name('userStore');
+    Route::post('/authenticate', 'authenticate')->name('authenticate');
 });

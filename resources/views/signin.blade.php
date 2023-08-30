@@ -3,7 +3,7 @@
 @section("title", "Authentification")
 
 @section('content')
-                <form action="" method="POST" autocomplete="off">
+                <form action="{{ route("authenticate") }}" method="POST" autocomplete="off">
                     @if (session("isValidate"))
                         <div class="alert alert-secondary text-center" role="alert">
                             <strong>Message success</strong> <br>{{ session("isValidate") }}
@@ -16,7 +16,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Mot de passe</label>
-                        <input type="text" name="password" class="form-control" placeholder="Saisir votre email">
+                        <input type="password" name="password" class="form-control" placeholder="Saisir votre mot de passe">
                     </div>
                     <button type="submit" class="btn btn-primary float-end">Connexion</button>
                 </form>

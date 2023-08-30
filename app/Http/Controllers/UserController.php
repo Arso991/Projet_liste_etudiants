@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -51,7 +52,7 @@ class UserController extends Controller
 
         $host = URL::temporarySignedRoute('verifyEmail', now()->addMinute(30), ['email' => $data['email']]);
 
-        Mail::send('mailconfirm', ['host' => $host, $data['name']], function($message) use($data){
+        Mail::send('mailconfirm', ['host' => $host, 'name' => $data['name']], function($message) use($data){
 
             $config = config('mail');
 
@@ -82,6 +83,28 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('signin')->with("isValidate", "Compte confirmer ! Vous pouvez vous connecter pour acceder à votre compte");
+    }
+
+    public function authenticate(Request $request){
+
+        $data = $request->all();
+
+        $users = Auth::attempt([
+            "email" => $data['email'],
+            "password" => $data['password'],
+            "email_verified" => true
+        ]);
+
+        if($users){
+            return redirect()->route('index');
+        }else{
+            return redirect()->back()->with("error", "[Combinaison email/mot de passe invalide !]");
+        }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
     }
 
     //
