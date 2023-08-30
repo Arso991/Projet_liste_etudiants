@@ -23,7 +23,7 @@ class UserController extends Controller
 
 
         $request->validate([
-            "picture" => "required|mimes:jpg,jpeg,png",
+            "avatar" => "required|mimes:jpg,jpeg,png",
             "name" => "required|min:2",
             "email" => array(
                 "required",
@@ -38,12 +38,12 @@ class UserController extends Controller
             ]);
 
             $image = null;
-        if($request->hasFile("picture")){
-            $image = $request->file("picture")->store("avatar");
+        if($request->hasFile("avatar")){
+            $image = $request->file("avatar")->store("avatar");
         }
 
         $save = User::create([
-            "picture" => $image,
+            "avatar" => $image,
             "name" => $data['name'],
             "email" => $data['email'],
             "password" => Hash::make($data['password'])

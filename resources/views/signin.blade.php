@@ -1,12 +1,12 @@
-@extends("layout.master-registry")
+@extends("layout.master_sign")
 
 @section("title", "Authentification")
 
 @section('content')
                 <form action="" method="POST" autocomplete="off">
-                    @if (session("success"))
+                    @if (session("isValidate"))
                         <div class="alert alert-secondary text-center" role="alert">
-                            <strong>Message success</strong> <br>{{ session("success") }}
+                            <strong>Message success</strong> <br>{{ session("isValidate") }}
                         </div>
                     @endif
                     @csrf
@@ -21,4 +21,5 @@
                     <button type="submit" class="btn btn-primary float-end">Connexion</button>
                 </form>
                 <p>Vous n'avez pas un compte ? <a href="{{ route('signup') }}">Cliquez ici</a></p>
+                <p>Mot de passe oublié ? <a href="{{ route('signup') }}">Cliquez ici</a></p>
 @stop

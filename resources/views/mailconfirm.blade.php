@@ -1,5 +1,5 @@
 <p>
-    Bonjour {{ $username }}
+    Bonjour {{ $name }}
 </p>
 <p>
     Pour activer votre compte, veuillez <a href="{{ $host }}">cliquez ici</a> .

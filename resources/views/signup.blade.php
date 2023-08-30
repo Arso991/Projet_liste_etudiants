@@ -1,14 +1,25 @@
-@extends("layout.master-registry")
+@extends("layout.master_sign")
 
 @section("title", "Inscription")
 
 @section('content')
-                <form action="{{ route('storeUser') }}" method="POST" enctype="multipart/form-data">
-                    {{-- @if (session("success"))
+                <form action="{{ route('userStore') }}" method="POST" enctype="multipart/form-data">
+                    @if (session("isValidate"))
                         <div class="alert alert-secondary text-center" role="alert">
-                            <strong>Message success</strong> <br>{{ session("success") }}
+                            <strong>Message success</strong> <br>{{ session("isValidate") }}
                         </div>
-                    @endif --}}
+                    @endif
+
+                    @if ($errors->any())
+                    <div class="alert alert-danger mt-3" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    
                     @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">Photo</label>
@@ -16,7 +27,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Nom</label>
-                        <input type="text" value="{{ old('lastname') }}" name="name" class="form-control" placeholder="Saisir votre Nom">
+                        <input type="text" value="{{ old('name') }}" name="name" class="form-control" placeholder="Saisir votre Nom">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Email</label>
