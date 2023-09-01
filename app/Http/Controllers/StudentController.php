@@ -12,12 +12,19 @@ class StudentController extends Controller
     //fonction pour afficher les données de la table
     public function studentData(){
         $user = Auth::user();
+        //$students = Students::where("user_id", $user->id)->get();
         $students = Students::all();
-
         $nom = $user ? $user->name:'';
         
         return view('student', compact('students', 'nom'));
     }
+
+/*     public function allstudent(){
+        $user = Auth::user();
+        $students = Students::all();
+        
+        return view('student', compact('students'));
+    } */
 
     //fonction pour afficher les détails
     public function studentDetails($id=null){
@@ -70,7 +77,8 @@ class StudentController extends Controller
             "specialite" => $data['specialite'],
             "biographie" => $data['biographie'],
             "picture" => $image,
-            "status" => $data['status']
+            "status" => true,
+            "user_id" => Auth::user()->id
         ]);
 
         return redirect()->route('index')->with('message', "Enrégistrement fait !");

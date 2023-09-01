@@ -1,12 +1,9 @@
-<div class="d-flex justify-content-between">
-    <div class="container mt-5 d-flex justify-content-md-end">
-        <a href="{{ route('studentId', ['addStudentForm']) }}" class="btn btn-primary">Ajouter un etudiant</a>
-        <a href="{{ route('signout') }}" class="btn btn-danger ms-2">Deconnecter</a>
-    </div>
-    <div class="container mt-5 d-flex justify-content-md-start">
-        <a href="{{ route('studentId', ['addStudentForm']) }}" class="btn btn-primary">Ajouter un etudiant</a>
-        <a href="{{ route('signout') }}" class="btn btn-danger ms-2">Deconnecter</a>
-    </div>
-</div>
 
-<h2 class="text-center muted mt-3">LISTE DES ETUDIANTS DE {{ $nom }}</h2>
+    <div class="container mt-3 d-flex justify-content-md-start">
+        <a href="{{ route('studentId', ['addStudentForm']) }}" class="btn btn-primary me-2">Ajouter un etudiant</a>
+        <a href="{{ route('classList') }}" class="btn btn-primary me-2">Gestion des cours</a>
+        <a href="{{ route("affectCourses") }}" class="btn btn-primary me-2">Attribution de cours</a>
+    </div>
+
+
+<h2 class="text-center muted mt-3">LISTE DES ETUDIANTS @if (isset($nom)) DE {{ $nom }} @endif </h2>

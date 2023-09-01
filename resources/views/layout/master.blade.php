@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 </head>
 <body>
@@ -17,8 +18,11 @@
             </div>
         </nav>
     </header>
+    <div class="mt-1 me-2 d-flex justify-content-md-end">
+        <a href="{{ route('signout') }}" class="btn btn-danger ms-2">Deconnecter</a>
+    </div>
     
     @yield('content')
-    
+
 </body>
 </html>

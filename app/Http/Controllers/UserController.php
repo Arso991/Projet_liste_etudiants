@@ -104,8 +104,84 @@ class UserController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('signin');
     }
 
+    public function forgot(){
+        return view('forgotpassword');
+    }
+
+    public function setpassword(Request $request){
+        $data = $request->all();
+
+        $request->validate([
+            'email' => array(
+                "required",
+                "regex:/^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$/"
+            )
+            ]);
+
+            $email = $data['email'];
+
+            $exist = User::where('email', $email)->exists();
+
+            if(!$exist){
+                return redirect()->back()->with('error', 'Email invalide !');
+            }else{
+                $link = URL::temporarySignedRoute('resetPassword', now()->addMinutes(20),['email'=>$email]);
+
+                Mail::send('mailpassword', ['link'=>$link, 'email'=>$email], function($message) use($data){
+                    $config = config('mail');
+
+                    $message -> subject('Reinitialisation de mot de passe !')
+                    ->from($config['from']['address'], $config['from']['name'])
+                    ->to($data['email']);
+
+                    return redirect()->back()->with("validate", "Un mail a ete envoyé pour reinitialiser votre mot de passe");
+                });
+            }
+    }
+
+    public function resetpassword(Request $request, $email){
+        $consumer = User::where('email', $email)->first();
+
+        if(!$consumer){
+            abort(404);
+        }
+
+        if(!$request->hasValidSignature()){
+            return redirect()->route('forgotPassword')->with('failed', 'Votre lien a expiré, veuillez reéssayer');
+        }
+
+        return view('resetPassword', compact('email'));
+    }
+
+    public function updatePassword(Request $request, $email){
+        $consumer = User::where('email', $email)->first();
+
+        if(!$consumer){
+            abort(404);
+        }
+
+        if(!$request->hasValidSignature()){
+            return redirect()->route('forgotPassword')->with('failed', 'Votre lien a expiré, veuillez reéssayer');
+        }
+
+        $data = $request->all();
+
+        $request->validate([
+            'password' => array(
+                "required",
+                "regex:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@$!%*?&#^_;:,])[A-Za-z\d@$!%*?&#^_;:,].{8,}$/",
+                "confirmed:password_confirmation"
+            )
+        ]);
+
+        $consumer->update([
+            "password" => Hash::make($data['password'])
+        ]);
+
+        return redirect()->route('signin')->with('verified', 'Connectez vous avec votre nouveau mot de passe.');
+    }
     //
 }
