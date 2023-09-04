@@ -26,9 +26,9 @@
                         <ul style="list-style: none">
                             @foreach ($affect as $item)
                                 <li>
-                                    <button class="btn btn-light mt-1" data-toggle="tooltip" data-placement="right" title="poiuy">
+                                    <a class="btn btn-light mt-1"  title="{{ $item->amphi->category->name }}">
                                     {{ $item->amphi->name }}
-                                    </button>
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>
