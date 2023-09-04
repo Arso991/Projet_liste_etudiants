@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\URL;
 class UserController extends Controller
 {
     public function login(){
-        return view('signin');
+        return view('registrations.signin');
     }
 
     public function register(){
-        return view('signup');
+        return view('registrations.signup');
     }
 
     public function store(Request $request){
@@ -108,7 +108,7 @@ class UserController extends Controller
     }
 
     public function forgot(){
-        return view('forgotpassword');
+        return view('registrations.forgotpassword');
     }
 
     public function setpassword(Request $request){
@@ -153,7 +153,7 @@ class UserController extends Controller
             return redirect()->route('forgotPassword')->with('failed', 'Votre lien a expiré, veuillez reéssayer');
         }
 
-        return view('resetPassword', compact('email'));
+        return view('registrations.resetPassword', compact('email'));
     }
 
     public function updatePassword(Request $request, $email){

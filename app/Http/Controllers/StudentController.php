@@ -13,10 +13,10 @@ class StudentController extends Controller
     public function studentData(){
         $user = Auth::user();
         //$students = Students::where("user_id", $user->id)->get();
-        $students = Students::all();
+        $students = Students::paginate(10);
         $nom = $user ? $user->name:'';
         
-        return view('student', compact('students', 'nom'));
+        return view('students.student', compact('students', 'nom'));
     }
 
 /*     public function allstudent(){
@@ -32,7 +32,7 @@ class StudentController extends Controller
 
         $data = Students::find($id);
         
-        return view('studentdetails', compact('id', 'data', 'students'));
+        return view('students.studentdetails', compact('id', 'data', 'students'));
     }
 
     //fonction pour renvoyer les données selon l'id et faire la mise à jour
@@ -40,7 +40,7 @@ class StudentController extends Controller
 
         $dataUpdate = Students::find($id);
         
-        return view('studentdetails', compact('id', 'dataUpdate'));
+        return view('students.studentdetails', compact('id', 'dataUpdate'));
     }
 
     //fonction pour ajouter un étudiant

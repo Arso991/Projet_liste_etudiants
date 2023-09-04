@@ -18,7 +18,7 @@
             <p class="mb-4"><strong>Nom:</strong> {{ $data['nom'] }} </p>
             <p class="mb-4"><strong>Prénom:</strong> {{ $data['prenom'] }}</p>
             <p class="mb-4"><strong>Date de naissance:</strong> {{ $data['birthday'] }}</p>
-            <p class="mb-4"><strong>Hobbies:</strong> {{ $data['hobbie1'] }}, {{ $data['hobbie2'] }}, {{ $data['hobbie3'] }}</p>
+            <p class="mb-4"><strong>Hobbies:</strong> {{ $data->Hobbies }}</p>
             <p class="mb-4"><strong>Spécialité:</strong> {{ $data['specialite'] }}</p>
         </div>
     </div>

@@ -18,4 +18,8 @@ class Courses extends Model
     public function staff(){
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function scopeId($query, $id){
+        $query->where('id', $id);
+    }
 }

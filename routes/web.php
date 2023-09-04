@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AffectationController;
+use App\Http\Controllers\AffectationprofsController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProfessorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,18 +53,30 @@ Route::controller(UserController::class)->group(function(){
     Route::post('/update-password/{email}', 'updatepassword')->name('updatePassword');
 });
 
-Route::controller(ClassController::class)->group(function(){
+Route::controller(ClassController::class)->middleware("auth")->group(function(){
     Route::get('/class', 'classlist')->name('classList');
     Route::get('/addclass-form', 'addclassform')->name('addClassForm');
     Route::post('/addclass/store', 'addclassStore')->name('addClassStore');
+    Route::get('/delete-class{id}', 'deleteclass')->name('deleteClass');
+    Route::get('/update-class{id}', 'updateclass')->name('updateClass');
+    Route::post('/update-class/store/{id}', 'updateclassStore')->name('updateClassStore');
     
 });
 
-Route::controller(CategoryController::class)->group(function(){
+Route::controller(CategoryController::class)->middleware("auth")->group(function(){
     Route::post('/addcategorie/store', 'addcategorieStore')->name('addCategory');
 });
 
-Route::controller(AffectationController::class)->group(function(){
+Route::controller(AffectationController::class)->middleware("auth")->group(function(){
     Route::get('/affectation', 'affectcourses')->name('affectCourses');
     Route::post('/affectation/store', 'affectstore')->name('affectStore');
 });
+
+Route::controller(ProfessorController::class)->middleware("auth")->group(function(){
+    Route::get('professor-list', 'professorlist')->name('professorList');
+    Route::get('addprofessor-form', 'addprofessor')->name('addProfessor');
+    Route::post('addprofessor/store','addprofessorStore')->name('addProfessorStore');
+    Route::get('professor-course/{id}', 'professorcourse')->name('professorCourse');
+});
+
+Route::post('/save/affectationprofs/{id}', [AffectationprofsController::class, 'saveaffectation'])->middleware("auth")->name('saveAffectationProfs');
