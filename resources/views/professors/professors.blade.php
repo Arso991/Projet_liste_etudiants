@@ -13,7 +13,7 @@
     @endif
 
     <table class="table table-hover mt-2">
-        <thead class="bg-dark">
+        <thead>
             <tr>
               <th>Nom et prénoms</th>
               <th>Téléphone</th>

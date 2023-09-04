@@ -28,7 +28,7 @@
                 
                 <label for="" class="form-label">Cours</label>
                 @if ($courses)
-                    <select name="course_id[]" class="form-select" id="multiple-select-field" aria-label="Default select example" multiple>
+                    <select name="course_id[]" class="form-select" id="multiple-select-field" aria-label="Default select example" data-placeholder="Selectionner un cours" multiple>
                         
                         @foreach ($courses as $course)
                             <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>
@@ -40,7 +40,7 @@
         </form>
 
         <table class="table table-hover">
-            <thead class="bg-dark">
+            <thead>
                 <tr>
                   <th>ID Affectation</th>
                   <th>Cours</th>
@@ -49,7 +49,7 @@
             @if (isset($affectProfs))
             <tbody>
                 @foreach ($affectProfs as $affectation=>$item)
-                
+
                 <tr>
                     <th>
                         @foreach ($item as $ids)
@@ -63,7 +63,7 @@
                                 <button class="btn btn-light mt-1" data-toggle="tooltip" data-placement="right" title="Programmation">
                                     {{ $course->cours->name }}
                                 </button>
-                                <button style="padding: 2px 8px; font-size: 10px;" type="button" class="btn btn-danger">Supprimer</button>
+                            <a href="{{ route('deleteAffectation',['id',$item->id]) }}" style="padding: 2px 8px; font-size: 10px;" type="button" class="btn btn-danger">Supprimer</a>
                             </li>
                             @endforeach
                         </ul>

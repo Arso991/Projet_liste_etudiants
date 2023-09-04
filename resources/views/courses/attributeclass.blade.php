@@ -5,7 +5,7 @@
 <div class="mt-5 me-3 ms-3 d-flex">
 
     <table class="table table-hover">
-        <thead class="bg-dark">
+        <thead>
             <tr>
               <th>ID Affectation</th>
               <th>Nom et Prenom(s) de l'étudiant    </th>
@@ -26,9 +26,9 @@
                         <ul style="list-style: none">
                             @foreach ($affect as $item)
                                 <li>
-                                    <a class="btn btn-light mt-1"  title="{{ $item->amphi->category->name }}">
+                                    <button class="btn btn-light mt-1" data-toggle="tooltip" data-placement="right"   title="{{ $item->amphi->category->name }}">
                                     {{ $item->amphi->name }}
-                                    </a>
+                                    </button>
                                 </li>
                             @endforeach
                         </ul>
@@ -73,7 +73,7 @@
             
             <label for="" class="form-label">Cours</label>
             @if ($courses)
-                <select name="course_id[]" class="form-select" id="multiple-select-field" aria-label="Default select example" multiple>
+                <select name="course_id[]" class="form-select" id="multiple-select-field" data-placeholder="Selectionner un cours" aria-label="Default select example" multiple>
                     
                     @foreach ($courses as $course)
                         <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>

@@ -7,6 +7,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfessorController;
+use App\Models\AffectationProfs;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,4 +80,8 @@ Route::controller(ProfessorController::class)->middleware("auth")->group(functio
     Route::get('professor-course/{id}', 'professorcourse')->name('professorCourse');
 });
 
-Route::post('/save/affectationprofs/{id}', [AffectationprofsController::class, 'saveaffectation'])->middleware("auth")->name('saveAffectationProfs');
+Route::controller(AffectationprofsController::class)->middleware('auth')->group(function(){
+    Route::post('/save/affectationprofs/{id}', 'saveaffectation')->name('saveAffectationProfs');
+    Route::get('/delete/affectationprofs/{id}', 'deleteaffectation')->name('deleteAffectation');
+});
+

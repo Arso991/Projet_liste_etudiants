@@ -13,7 +13,7 @@ class AffectationprofsController extends Controller
         $courselist = $request->input("course_id");
 
         foreach($courselist as $course_id){
-            
+
             if(AffectationProfs::where('professor_id', $id)->where('course_id', $course_id)){
                 return redirect()->back()->with("message", "Cours déjà attribué à un enseignant");
             }else{
@@ -25,5 +25,9 @@ class AffectationprofsController extends Controller
         }
 
         return redirect()->back()->with("message", "Le ou les cours ont été affectés !");
+    }
+
+    public function deleteaffectation($id){
+
     }
 }

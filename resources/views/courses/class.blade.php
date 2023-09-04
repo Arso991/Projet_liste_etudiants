@@ -6,13 +6,13 @@
     <a href="{{ route('addClassForm') }}" class="btn btn-primary me-2">Ajouter un cours</a>
 
     @if (session('message'))
-    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
         <strong>Message !</strong> <br> {{ session('message') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
     @if (session('success'))
-    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
         <strong>Message !</strong> <br> {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -25,7 +25,7 @@
     @endif
 
     <table class="table table-hover">
-        <thead class="bg-dark">
+        <thead>
             <tr>
               <th>Intitulé</th>
               <th>Masse horaire</th>
