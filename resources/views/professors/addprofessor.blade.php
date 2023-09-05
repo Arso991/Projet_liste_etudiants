@@ -48,7 +48,7 @@
             </thead>
             @if (isset($affectProfs))
             <tbody>
-                @foreach ($affectProfs as $affectation=>$item)
+                @foreach ($affectProfs as $affectation => $item)
 
                 <tr>
                     <th>
@@ -63,7 +63,7 @@
                                 <button class="btn btn-light mt-1" data-toggle="tooltip" data-placement="right" title="Programmation">
                                     {{ $course->cours->name }}
                                 </button>
-                            <a href="{{ route('deleteAffectation',['id',$item->id]) }}" style="padding: 2px 8px; font-size: 10px;" type="button" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ route('deleteAffectation',['name' => $course->cours->id]) }}" style="padding: 2px 8px; font-size: 10px;" type="button" class="btn btn-danger">Supprimer</a>
                             </li>
                             @endforeach
                         </ul>
