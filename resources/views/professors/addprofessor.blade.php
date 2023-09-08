@@ -7,7 +7,7 @@
     <div class="mt-5 me-3 ms-3 d-flex">
         <form method="POST" action="{{ route("saveAffectationProfs", ['id'=>$id]) }}" class="container d-flex flex-column">
             @csrf
-            <h3 class="text-muted text-center">{{ $id->lastname }} {{ $id->firstname }}</h3>
+            <h3 class="text-muted text-center">{{ $idss->lastname }} {{ $idss->firstname }}</h3>
                 @if (session('message'))
                     <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
                         <strong>Message !</strong> <br> {{ session("message") }}
@@ -48,22 +48,20 @@
             </thead>
             @if (isset($affectProfs))
             <tbody>
-                @foreach ($affectProfs as $affectation => $item)
+                @foreach ($affectProfs as $item)
 
                 <tr>
-                    <th>
-                        @foreach ($item as $ids)
-                            {{ $ids->id }}
-                        @endforeach
+                    <th> 
+                        {{ $item->id }}
                     </th>
                     <td>
                         <ul style="list-style: none">
-                            @foreach ($item as $course)
+                            @foreach ($item->affectations as $element)
                             <li>
-                                <button class="btn btn-light mt-1" data-toggle="tooltip" data-placement="right" title="Programmation">
-                                    {{ $course->cours->name }}
+                                <button class="btn btn-light mt-1" data-toggle="tooltip" data-placement="right" title="{{ $element->cours->category->name }}">
+                                    {{ $element->cours->name }}
                                 </button>
-                            <a href="{{ route('deleteAffectation',['name' => $course->cours->id]) }}" style="padding: 2px 8px; font-size: 10px;" type="button" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ route('deleteAffectation',['id' => $element->cours->id]) }}" style="padding: 2px 8px; font-size: 10px;" type="button" class="btn btn-danger">Supprimer</a>
                             </li>
                             @endforeach
                         </ul>

@@ -76,4 +76,6 @@ class ClassController extends Controller
         return redirect()->route("classList")->with("notification", "Cours mis à jours !");
     }
 
+    
+
 }

@@ -11,9 +11,8 @@ class AffectationProfs extends Model
 
     protected $table = 'afectationprofessors';
 
-    public function profs(){
-        return $this->belongsTo(Students::class, 'professor_id', 'id');
-    }
+    protected $with = ["cours"];
+
 
     public function cours(){
         return $this->belongsTo(Courses::class, 'course_id', 'id');

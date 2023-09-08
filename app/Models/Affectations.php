@@ -9,13 +9,12 @@ class Affectations extends Model
 {
     protected $fillable = ['student_id', 'course_id'];
 
+    protected $with = ["studying"];
+
     protected $table = 'afectationstudents';
 
-    public function uac(){
-        return $this->belongsTo(Students::class, 'student_id', 'id');
-    }
 
-    public function amphi(){
+    public function studying(){
         return $this->belongsTo(Courses::class, 'course_id', 'id');
     }
 

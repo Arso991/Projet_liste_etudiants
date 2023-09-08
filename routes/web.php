@@ -58,8 +58,8 @@ Route::controller(ClassController::class)->middleware("auth")->group(function(){
     Route::get('/class', 'classlist')->name('classList');
     Route::get('/addclass-form', 'addclassform')->name('addClassForm');
     Route::post('/addclass/store', 'addclassStore')->name('addClassStore');
-    Route::get('/delete-class{id}', 'deleteclass')->name('deleteClass');
-    Route::get('/update-class{id}', 'updateclass')->name('updateClass');
+    Route::get('/delete-class/{id}', 'deleteclass')->name('deleteClass');
+    Route::get('/update-class/{id}', 'updateclass')->name('updateClass');
     Route::post('/update-class/store/{id}', 'updateclassStore')->name('updateClassStore');
     
 });
@@ -71,6 +71,8 @@ Route::controller(CategoryController::class)->middleware("auth")->group(function
 Route::controller(AffectationController::class)->middleware("auth")->group(function(){
     Route::get('/affectation', 'affectcourses')->name('affectCourses');
     Route::post('/affectation/store', 'affectstore')->name('affectStore');
+    Route::get('/attribute-note/{idE}/{idC}', 'attributenote')->name('attributeNote');
+    Route::post('/attribute-note/store/{idE}/{idC}', 'attributenotestore')->name('attributeNoteStore');
 });
 
 Route::controller(ProfessorController::class)->middleware("auth")->group(function(){

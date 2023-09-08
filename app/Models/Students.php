@@ -22,8 +22,32 @@ class Students extends Model
         return $this->hobbie1.', '.$this->hobbie2.', '.$this->hobbie3;
     }
 
-    public function cours(){
-        return $this->belongsToMany(Courses::class, "id", "student_id", "course_id");
+   public function affectationlist(){
+     return $this->hasMany(Affectations::class, 'student_id', "id");
+   }
+
+   public function notes(){
+    return $this->hasMany(Notes::class, 'student_id', "id");
+  }
+
+  public function getMoyennedevoirAttribute($idCours){
+    $moydev = 0;
+    if($this->notes){
+      $devoirs = $this->notes()->where("type", "Devoir")->where("course_id", $idCours)->get();
+      dd($devoirs);
+      if(count($devoirs)==2){
+        $sum = 0;
+        foreach($devoirs as $item){
+          $sum += $item->note;
+        }
+        $moydev = $sum/count($devoirs);
+      }
     }
+    return $moydev;
+  }
+
+  public function noteEtudiant(){
+    return $this->hasManyThrough(Courses::class, Notes::class, "id", "student_id");
+  }
 
 }

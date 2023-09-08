@@ -12,23 +12,21 @@
               <th>Cours</th>
             </tr>
         </thead>
-        @if (isset($affectBy))
+        @if (isset($affect))
         <tbody>
-            @foreach ($affectBy as $studentId => $affect)
+            @foreach ($affect as $item)
                 <tr>
                     <th>
-                        @foreach ($affect as $item)
                         {{ $item->id }}
-                        @endforeach
                     </th>
-                    <td>{{ $affect[0]->uac->Fullname }}</td>
+                    <td>{{ $item->Fullname }}</td>
                     <td>
                         <ul style="list-style: none">
-                            @foreach ($affect as $item)
+                            @foreach ($item->affectationlist as $element)
                                 <li>
-                                    <button class="btn btn-light mt-1" data-toggle="tooltip" data-placement="right"   title="{{ $item->amphi->category->name }}">
-                                    {{ $item->amphi->name }}
-                                    </button>
+                                    <a href="{{ route('attributeNote',["idE" => $item, "idC" => $element->studying->id]) }}" class="btn btn-light mt-1" data-toggle="tooltip" data-placement="right"   title="{{ $element->studying->category->name }}">
+                                    {{ $element->studying->name }}
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>

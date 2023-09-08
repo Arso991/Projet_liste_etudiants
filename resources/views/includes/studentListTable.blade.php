@@ -38,7 +38,7 @@
                     <td>
                         <div style="width: 5rem; height:5rem; ">
                             <img @if (!empty($item['picture']))
-                            src="{{ asset($item['picture']) }}" height="100%" width="100%" style="object-fit: cover; border-radius:100%"
+                            src="{{ asset($item['picture']) }}"
                             @endif src="{{ asset('img/img14.jpg') }}" alt="" height="100%" width="100%" style="object-fit: cover; border-radius:100%">
                         </div>
                     </td>

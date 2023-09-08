@@ -15,13 +15,12 @@ class AffectationprofsController extends Controller
         foreach($courselist as $course_id){
 
             if(AffectationProfs::where('professor_id', $id)->where('course_id', $course_id)->exists()){
-                return redirect()->back()->with("message", "Cours déjà attribué à un enseignant");
-            }else{
-                $save = AffectationProfs::create([
+                
+                AffectationProfs::updateOrCreate([
                     "professor_id"=> $id,
                     "course_id"=> $course_id,
                 ]);
-            } 
+            }
         }
 
         return redirect()->back()->with("message", "Le ou les cours ont été affectés !");

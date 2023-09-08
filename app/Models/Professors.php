@@ -10,4 +10,8 @@ class Professors extends Model
     protected $fillable = ["lastname","firstname","call","address","user_id"];
 
     protected $table = "professors";
+
+    public function affectations(){
+        return $this->hasMany(AffectationProfs::class, 'professor_id', "id");
+    }
 }

@@ -10,7 +10,7 @@
     <div class="d-flex align-items-center">
         <div style="width: 40rem; height:30rem">
             <img @if (!@empty($data['picture'])) 
-            src="{{ asset($data['picture']) }}" height="100%" width="100%" style="object-fit: cover; border-radius:15px" class="img-thumbnails mt-2 me-3" 
+            src="{{ asset($data['picture']) }}" class="img-thumbnails mt-2 me-3" 
             @endif
             src="{{ asset('img/img14.jpg') }}" height="100%" width="100%" style="object-fit: cover; border-radius:15px" class="img-thumbnails mt-2 me-3">
         </div>

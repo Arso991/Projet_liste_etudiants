@@ -44,11 +44,12 @@ class ProfessorController extends Controller
     }
 
     public function professorcourse($id){
-        $id = Professors::find($id);
+        $idss = Professors::find($id);
         $courses = Courses::all();
-        $affect = AffectationProfs::with("profs", "cours")->get();
-        $affectProfs = $affect->groupBy("professor_id");
 
-        return view('professors.addprofessor', compact('id', 'courses', 'affectProfs'));
+        $affectProfs = Professors::with("affectations")->has('affectations')->where('id', $id)->get();
+        
+
+        return view('professors.addprofessor', compact('idss','id', 'courses', 'affectProfs'));
     }
 }
